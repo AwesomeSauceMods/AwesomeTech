@@ -1,7 +1,7 @@
 package com.awesomesauce.minecraft.forge.awesometech.api
 
 
-trait TMachineBorder {
+trait TMachineComponent {
   def setMachine(machine:TMachine)
-  def getMachine(machine:TMachine)
+  def getMachine:TMachine
 }
