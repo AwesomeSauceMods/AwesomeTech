@@ -44,11 +44,13 @@ class TileEntityMachineController extends TileEntity with TMachine with IEnergyH
   def getZ = zCoord
 
   def drainFluid(fluid: FluidStack, simulate: Boolean): FluidStack = machineTanks.drainFluid(fluid, simulate)
-  def drainItem(item: ItemStack, simulate:Boolean): Boolean = false
+
+  def drainItem(item: ItemStack, simulate: Boolean): ItemStack = null
   def drainRF(amount:Int, simulate: Boolean): Int = storage.extractEnergy(amount, simulate)
 
   def insertFluid(fluid: FluidStack, simulate: Boolean): FluidStack = machineTanks.insertFluid(fluid, simulate)
-  def insertItem(item: ItemStack, simulate: Boolean): Boolean = false
+
+  def insertItem(item: ItemStack, simulate: Boolean): ItemStack = null
   def insertRF(amount:Int, simulate: Boolean): Int = storage.receiveEnergy(amount, simulate)
   /*
    * End TMachine
