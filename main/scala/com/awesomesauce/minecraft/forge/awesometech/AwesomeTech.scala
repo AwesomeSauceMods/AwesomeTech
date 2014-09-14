@@ -54,7 +54,7 @@ object AwesomeTech extends TAwesomeSauceMod {
 
     computerStoneBlockPlacer = ItemUtil.makeBlock(this, "computerBlock", Material.rock, () => new TileEntityStoneBlockPlacer)
 
-    toolBinder = ItemUtil.makeItem(this, "toolBinder", new ItemToolBinder)
+    toolBinder = ItemUtil.makeItem(this, "toolBinder", new ItemToolBinder).asInstanceOf[ItemDescription].setShowUsage(true)
   }
 
   def preInit() = {
