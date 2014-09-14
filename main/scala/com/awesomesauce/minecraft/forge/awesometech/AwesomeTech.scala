@@ -1,8 +1,10 @@
 package com.awesomesauce.minecraft.forge.awesometech
 
-import com.awesomesauce.minecraft.forge.awesometech.tile.machine.TileEntityMachineController
+import com.awesomesauce.minecraft.forge.awesometech.item.ItemToolBinder
+import com.awesomesauce.minecraft.forge.awesometech.tile.computer.{TileEntityComputerCPU, TileEntityComputerFunctionStart, TileEntityStoneBlockPlacer}
 import com.awesomesauce.minecraft.forge.core.components.AwesomeSauceComponents
 import com.awesomesauce.minecraft.forge.core.lib.TAwesomeSauceMod
+import com.awesomesauce.minecraft.forge.core.lib.item.ItemDescription
 import com.awesomesauce.minecraft.forge.core.lib.util.ItemUtil
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
@@ -12,6 +14,18 @@ import net.minecraft.block.material.Material
 
 @Mod(modid = "AwesomeTech", name = "AwesomeTech", modLanguage = "scala")
 object AwesomeTech extends TAwesomeSauceMod {
+
+  @Mod.Metadata("AwesomeTech")
+  var metadata: ModMetadata = null
+  var stoneComputerCPU: Block = null
+  var ironComputerCPU: Block = null
+  var diamondComputerCPU: Block = null
+  var enderComputerCPU: Block = null
+  var computerFunctionStart: Block = null
+  var computerStoneBlockPlacer: Block = null
+  var toolBinder: ItemDescription = null
+  var toolReader: ItemDescription = null
+  var toolDataStorage: ItemDescription = null
 
   @EventHandler
   def aspri(e: FMLPreInitializationEvent) = super.awesomesaucepreinit(e)
@@ -30,20 +44,17 @@ object AwesomeTech extends TAwesomeSauceMod {
 
   def getTabIconItem = () => AwesomeSauceComponents.ingotPureAwesomeite
 
-  @Mod.Metadata("AwesomeTech")
-  var metadata: ModMetadata = null
-
-  var machineInput: Block = null
-  var machineOutput: Block = null
-  var machineBorder: Block = null
-  var machineGlassBorder : Block = null
-  var machineRFAcceptor: Block = null
-  var machineController: Block = null
-
-  var machineCrafter: Block = null
   def init() = {
-    //machineBorder = ItemUtil.makeBlock(this, "machineBorder", Material.iron, () => new TileEntityMachineBorder)
-    machineController = ItemUtil.makeBlock(this, "machineController", Material.iron, () => new TileEntityMachineController)
+    stoneComputerCPU = ItemUtil.makeBlock(this, "stoneComputerCPU", Material.rock, () => new TileEntityComputerCPU(3, 3, 2))
+    ironComputerCPU = ItemUtil.makeBlock(this, "ironComputerCPU", Material.iron, () => new TileEntityComputerCPU(5, 10, 5))
+    diamondComputerCPU = ItemUtil.makeBlock(this, "diamondComputerCPU", Material.iron, () => new TileEntityComputerCPU(20, 30, 10))
+    enderComputerCPU = ItemUtil.makeBlock(this, "enderComputerCPU", Material.iron, () => new TileEntityComputerCPU(100, 100, 100))
+
+    computerFunctionStart = ItemUtil.makeBlock(this, "computerFunctionStart", Material.iron, () => new TileEntityComputerFunctionStart)
+
+    computerStoneBlockPlacer = ItemUtil.makeBlock(this, "computerBlock", Material.rock, () => new TileEntityStoneBlockPlacer)
+
+    toolBinder = ItemUtil.makeItem(this, "toolBinder", new ItemToolBinder)
   }
 
   def preInit() = {
