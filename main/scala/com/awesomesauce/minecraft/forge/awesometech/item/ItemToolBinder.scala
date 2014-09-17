@@ -28,7 +28,7 @@ class ItemToolBinder extends ItemDescription {
       val cy = stack.getTagCompound.getInteger("y")
       val cz = stack.getTagCompound.getInteger("z")
       if (world.getTileEntity(cx, cy, cz).isInstanceOf[TComputerCPU]) {
-        val cpu = world.getTileEntity(x, y, z).asInstanceOf[TComputerCPU]
+        val cpu = world.getTileEntity(cx, cy, cz).asInstanceOf[TComputerCPU]
         bindable.bind(cpu)
         if (bindable.isInstanceOf[TComputerEffector]) {
           cpu.addEffector(bindable.getName, bindable.asInstanceOf[TComputerEffector])
