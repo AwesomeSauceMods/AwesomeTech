@@ -23,6 +23,8 @@ object AwesomeTech extends TAwesomeSauceMod {
   var enderComputerCPU: Block = null
   var computerFunctionStart: Block = null
   var computerStoneBlockPlacer: Block = null
+  var computerImportItem: Block = null
+  var computerExportItem: Block = null
   var toolBinder: ItemDescription = null
   var toolReader: ItemDescription = null
   var toolDataStorage: ItemDescription = null
@@ -45,16 +47,16 @@ object AwesomeTech extends TAwesomeSauceMod {
   def getTabIconItem = () => AwesomeSauceComponents.ingotPureAwesomeite
 
   def init() = {
-    stoneComputerCPU = ItemUtil.makeBlock(this, "stoneComputerCPU", Material.rock, () => new TileEntityComputerCPU(3, 3, 2))
-    ironComputerCPU = ItemUtil.makeBlock(this, "ironComputerCPU", Material.iron, () => new TileEntityComputerCPU(5, 10, 5))
-    diamondComputerCPU = ItemUtil.makeBlock(this, "diamondComputerCPU", Material.iron, () => new TileEntityComputerCPU(20, 30, 10))
+    stoneComputerCPU = ItemUtil.makeBlock(this, "stoneComputerCPU", Material.rock, () => new TileEntityComputerCPU(3, 3, 1))
+    ironComputerCPU = ItemUtil.makeBlock(this, "ironComputerCPU", Material.iron, () => new TileEntityComputerCPU(5, 10, 3))
+    diamondComputerCPU = ItemUtil.makeBlock(this, "diamondComputerCPU", Material.iron, () => new TileEntityComputerCPU(20, 30, 7))
     enderComputerCPU = ItemUtil.makeBlock(this, "enderComputerCPU", Material.iron, () => new TileEntityComputerCPU(100, 100, 100))
 
     computerFunctionStart = ItemUtil.makeBlock(this, "computerFunctionStart", Material.iron, () => new TileEntityComputerFunctionStart)
 
-    computerStoneBlockPlacer = ItemUtil.makeBlock(this, "computerBlock", Material.rock, () => new TileEntityStoneBlockPlacer)
+    computerStoneBlockPlacer = ItemUtil.makeBlock(this, "computerStoneBlockPlacer", Material.rock, () => new TileEntityStoneBlockPlacer)
 
-    toolBinder = ItemUtil.makeItem(this, "toolBinder", new ItemToolBinder).asInstanceOf[ItemDescription].setShowUsage(true)
+    toolBinder = ItemUtil.makeItem(this, "toolBinder", new ItemToolBinder).asInstanceOf[ItemDescription].setShowUsage(true).addUsage("Right Click", "On a cpu, stores the cpu, on a other block, binds the block to the cpu.")
   }
 
   def preInit() = {

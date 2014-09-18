@@ -8,6 +8,8 @@ class TileEntityComputerCPU(maxEffectors: Int, maxData: Int, maxRange: Int) exte
   val data = scala.collection.mutable.Map[String, TComputerData]()
   val effectors = scala.collection.mutable.Map[String, TComputerEffector]()
 
+  def range = range + 1
+
   def addData(name: String, nudata: TComputerData): Boolean =
     if (data.size < maxData || data.contains(name)) {
       data(name) = nudata

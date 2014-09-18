@@ -8,4 +8,6 @@ trait TComputerCPU extends TComputerLocatable {
   def callEffector(name: String): Boolean
 
   def getData(name: String): TComputerData
+
+  def range: Int
 }

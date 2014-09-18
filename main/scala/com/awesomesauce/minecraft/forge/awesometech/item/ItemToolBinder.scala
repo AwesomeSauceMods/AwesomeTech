@@ -29,12 +29,18 @@ class ItemToolBinder extends ItemDescription {
       val cz = stack.getTagCompound.getInteger("z")
       if (world.getTileEntity(cx, cy, cz).isInstanceOf[TComputerCPU]) {
         val cpu = world.getTileEntity(cx, cy, cz).asInstanceOf[TComputerCPU]
-        bindable.bind(cpu)
-        if (bindable.isInstanceOf[TComputerEffector]) {
-          cpu.addEffector(bindable.getName, bindable.asInstanceOf[TComputerEffector])
+        if ((cx - cpu.range < x && cx + cpu.range > x) && (cy - cpu.range < y && cy + cpu.range > y) && (cz - cpu.range < z && cz + cpu.range > z)) {
+          bindable.bind(cpu)
+          if (bindable.isInstanceOf[TComputerEffector]) {
+            cpu.addEffector(bindable.getName, bindable.asInstanceOf[TComputerEffector])
+          }
+          PlayerUtil.sendChatMessage(player, "Bound CPU to " + bindable.getName)
+          true
         }
-        PlayerUtil.sendChatMessage(player, "Bound CPU to " + bindable.getName)
-        true
+        else {
+          PlayerUtil.sendChatMessage(player, "CPU out of range.")
+          false
+        }
       }
       else {
         PlayerUtil.sendChatMessage(player, "Missing CPU")
