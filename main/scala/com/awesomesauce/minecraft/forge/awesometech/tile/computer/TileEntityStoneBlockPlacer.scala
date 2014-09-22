@@ -22,7 +22,7 @@ class TileEntityStoneBlockPlacer extends TileEntityComputerEffector {
           var y: Int = 0
           var z: Int = 0
           if (pData.relative) {
-            if (onlyNextTo && (pData.x <= 1 && pData.x >= -1) && (pData.y <= 1 && pdata.y >= -1))
+            if (onlyNextTo && (pData.x <= 1 && pData.x >= -1) && (pData.y <= 1 && pData.y >= -1))
               x = getX + pData.x
             y = getY + pData.y
             z = getZ + pData.z
