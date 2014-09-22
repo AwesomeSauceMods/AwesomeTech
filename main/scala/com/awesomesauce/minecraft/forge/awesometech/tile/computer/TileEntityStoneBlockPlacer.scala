@@ -18,9 +18,20 @@ class TileEntityStoneBlockPlacer extends TileEntityComputerEffector {
         val positionData = cpu.getData(positionDataName)
         if (positionData.isInstanceOf[DataPosition]) {
           val pData = positionData.asInstanceOf[DataPosition]
-          val x = getX + pData.x
-          val y = getY + pData.y
-          val z = getZ + pData.z
+          var x: Int = 0
+          var y: Int = 0
+          var z: Int = 0
+          if (pData.relative) {
+            if (onlyNextTo && (pData.x <= 1 && pData.x >= -1) && (pData.y <= 1 && pdata.y >= -1))
+              x = getX + pData.x
+            y = getY + pData.y
+            z = getZ + pData.z
+          }
+          else if (supportsAbsolute) {
+            x = pData.x
+            y = pData.y
+            z = pData.z
+          }
           if (block.isReplaceable(worldObj, x, y, z)) {
             worldObj.setBlock(x, y, z, block)
             true
@@ -33,4 +44,8 @@ class TileEntityStoneBlockPlacer extends TileEntityComputerEffector {
     }
     else false
   }
+
+  def supportsAbsolute = false
+
+  def onlyNextTo = true
 }
